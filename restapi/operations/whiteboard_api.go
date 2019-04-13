@@ -39,11 +39,11 @@ func NewWhiteboardAPI(spec *loads.Document) *WhiteboardAPI {
 		BearerAuthenticator: security.BearerAuth,
 		JSONConsumer:        runtime.JSONConsumer(),
 		JSONProducer:        runtime.JSONProducer(),
-		UsersBoardsFingerpathsByBoardNameGetHandler: users.BoardsFingerpathsByBoardNameGetHandlerFunc(func(params users.BoardsFingerpathsByBoardNameGetParams) middleware.Responder {
-			return middleware.NotImplemented("operation UsersBoardsFingerpathsByBoardNameGet has not yet been implemented")
+		UsersGetBoardsBoardNameFingerpathsHandler: users.GetBoardsBoardNameFingerpathsHandlerFunc(func(params users.GetBoardsBoardNameFingerpathsParams) middleware.Responder {
+			return middleware.NotImplemented("operation UsersGetBoardsBoardNameFingerpaths has not yet been implemented")
 		}),
-		UsersBoardsFingerpathsByBoardNamePostHandler: users.BoardsFingerpathsByBoardNamePostHandlerFunc(func(params users.BoardsFingerpathsByBoardNamePostParams) middleware.Responder {
-			return middleware.NotImplemented("operation UsersBoardsFingerpathsByBoardNamePost has not yet been implemented")
+		UsersPostBoardsBoardNameFingerpathsHandler: users.PostBoardsBoardNameFingerpathsHandlerFunc(func(params users.PostBoardsBoardNameFingerpathsParams) middleware.Responder {
+			return middleware.NotImplemented("operation UsersPostBoardsBoardNameFingerpaths has not yet been implemented")
 		}),
 	}
 }
@@ -76,10 +76,10 @@ type WhiteboardAPI struct {
 	// JSONProducer registers a producer for a "application/json" mime type
 	JSONProducer runtime.Producer
 
-	// UsersBoardsFingerpathsByBoardNameGetHandler sets the operation handler for the boards fingerpaths by board name get operation
-	UsersBoardsFingerpathsByBoardNameGetHandler users.BoardsFingerpathsByBoardNameGetHandler
-	// UsersBoardsFingerpathsByBoardNamePostHandler sets the operation handler for the boards fingerpaths by board name post operation
-	UsersBoardsFingerpathsByBoardNamePostHandler users.BoardsFingerpathsByBoardNamePostHandler
+	// UsersGetBoardsBoardNameFingerpathsHandler sets the operation handler for the get boards board name fingerpaths operation
+	UsersGetBoardsBoardNameFingerpathsHandler users.GetBoardsBoardNameFingerpathsHandler
+	// UsersPostBoardsBoardNameFingerpathsHandler sets the operation handler for the post boards board name fingerpaths operation
+	UsersPostBoardsBoardNameFingerpathsHandler users.PostBoardsBoardNameFingerpathsHandler
 
 	// ServeError is called when an error is received, there is a default handler
 	// but you can set your own with this
@@ -143,12 +143,12 @@ func (o *WhiteboardAPI) Validate() error {
 		unregistered = append(unregistered, "JSONProducer")
 	}
 
-	if o.UsersBoardsFingerpathsByBoardNameGetHandler == nil {
-		unregistered = append(unregistered, "users.BoardsFingerpathsByBoardNameGetHandler")
+	if o.UsersGetBoardsBoardNameFingerpathsHandler == nil {
+		unregistered = append(unregistered, "users.GetBoardsBoardNameFingerpathsHandler")
 	}
 
-	if o.UsersBoardsFingerpathsByBoardNamePostHandler == nil {
-		unregistered = append(unregistered, "users.BoardsFingerpathsByBoardNamePostHandler")
+	if o.UsersPostBoardsBoardNameFingerpathsHandler == nil {
+		unregistered = append(unregistered, "users.PostBoardsBoardNameFingerpathsHandler")
 	}
 
 	if len(unregistered) > 0 {
@@ -252,12 +252,12 @@ func (o *WhiteboardAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
-	o.handlers["GET"]["/boards/{boardName}/fingerpaths"] = users.NewBoardsFingerpathsByBoardNameGet(o.context, o.UsersBoardsFingerpathsByBoardNameGetHandler)
+	o.handlers["GET"]["/boards/{boardName}/fingerpaths"] = users.NewGetBoardsBoardNameFingerpaths(o.context, o.UsersGetBoardsBoardNameFingerpathsHandler)
 
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
-	o.handlers["POST"]["/boards/{boardName}/fingerpaths"] = users.NewBoardsFingerpathsByBoardNamePost(o.context, o.UsersBoardsFingerpathsByBoardNamePostHandler)
+	o.handlers["POST"]["/boards/{boardName}/fingerpaths"] = users.NewPostBoardsBoardNameFingerpaths(o.context, o.UsersPostBoardsBoardNameFingerpathsHandler)
 
 }
 

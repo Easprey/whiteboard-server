@@ -36,8 +36,7 @@ func init() {
     },
     "version": "0.1.0"
   },
-  "host": "virtserver.swaggerhub.com",
-  "basePath": "/WebersterInc/WhiteBoard/0.1.0",
+  "basePath": "/api/v1",
   "paths": {
     "/boards/{boardName}/fingerpaths": {
       "get": {
@@ -49,7 +48,6 @@ func init() {
           "users"
         ],
         "summary": "getBoardFingerPaths",
-        "operationId": "BoardsFingerpathsByBoardNameGet",
         "parameters": [
           {
             "type": "string",
@@ -85,7 +83,6 @@ func init() {
           "users"
         ],
         "summary": "addBoardFingerPaths",
-        "operationId": "BoardsFingerpathsByBoardNamePost",
         "parameters": [
           {
             "type": "string",
@@ -184,8 +181,7 @@ func init() {
     },
     "version": "0.1.0"
   },
-  "host": "virtserver.swaggerhub.com",
-  "basePath": "/WebersterInc/WhiteBoard/0.1.0",
+  "basePath": "/api/v1",
   "paths": {
     "/boards/{boardName}/fingerpaths": {
       "get": {
@@ -197,7 +193,6 @@ func init() {
           "users"
         ],
         "summary": "getBoardFingerPaths",
-        "operationId": "BoardsFingerpathsByBoardNameGet",
         "parameters": [
           {
             "type": "string",
@@ -233,7 +228,6 @@ func init() {
           "users"
         ],
         "summary": "addBoardFingerPaths",
-        "operationId": "BoardsFingerpathsByBoardNamePost",
         "parameters": [
           {
             "type": "string",

@@ -12,8 +12,8 @@ import (
 	"strings"
 )
 
-// BoardsFingerpathsByBoardNameGetURL generates an URL for the boards fingerpaths by board name get operation
-type BoardsFingerpathsByBoardNameGetURL struct {
+// GetBoardsBoardNameFingerpathsURL generates an URL for the get boards board name fingerpaths operation
+type GetBoardsBoardNameFingerpathsURL struct {
 	BoardName string
 
 	_basePath string
@@ -24,7 +24,7 @@ type BoardsFingerpathsByBoardNameGetURL struct {
 // WithBasePath sets the base path for this url builder, only required when it's different from the
 // base path specified in the swagger spec.
 // When the value of the base path is an empty string
-func (o *BoardsFingerpathsByBoardNameGetURL) WithBasePath(bp string) *BoardsFingerpathsByBoardNameGetURL {
+func (o *GetBoardsBoardNameFingerpathsURL) WithBasePath(bp string) *GetBoardsBoardNameFingerpathsURL {
 	o.SetBasePath(bp)
 	return o
 }
@@ -32,12 +32,12 @@ func (o *BoardsFingerpathsByBoardNameGetURL) WithBasePath(bp string) *BoardsFing
 // SetBasePath sets the base path for this url builder, only required when it's different from the
 // base path specified in the swagger spec.
 // When the value of the base path is an empty string
-func (o *BoardsFingerpathsByBoardNameGetURL) SetBasePath(bp string) {
+func (o *GetBoardsBoardNameFingerpathsURL) SetBasePath(bp string) {
 	o._basePath = bp
 }
 
 // Build a url path and query string
-func (o *BoardsFingerpathsByBoardNameGetURL) Build() (*url.URL, error) {
+func (o *GetBoardsBoardNameFingerpathsURL) Build() (*url.URL, error) {
 	var _result url.URL
 
 	var _path = "/boards/{boardName}/fingerpaths"
@@ -46,12 +46,12 @@ func (o *BoardsFingerpathsByBoardNameGetURL) Build() (*url.URL, error) {
 	if boardName != "" {
 		_path = strings.Replace(_path, "{boardName}", boardName, -1)
 	} else {
-		return nil, errors.New("boardName is required on BoardsFingerpathsByBoardNameGetURL")
+		return nil, errors.New("boardName is required on GetBoardsBoardNameFingerpathsURL")
 	}
 
 	_basePath := o._basePath
 	if _basePath == "" {
-		_basePath = "/WebersterInc/WhiteBoard/0.1.0"
+		_basePath = "/api/v1"
 	}
 	_result.Path = golangswaggerpaths.Join(_basePath, _path)
 
@@ -59,7 +59,7 @@ func (o *BoardsFingerpathsByBoardNameGetURL) Build() (*url.URL, error) {
 }
 
 // Must is a helper function to panic when the url builder returns an error
-func (o *BoardsFingerpathsByBoardNameGetURL) Must(u *url.URL, err error) *url.URL {
+func (o *GetBoardsBoardNameFingerpathsURL) Must(u *url.URL, err error) *url.URL {
 	if err != nil {
 		panic(err)
 	}
@@ -70,17 +70,17 @@ func (o *BoardsFingerpathsByBoardNameGetURL) Must(u *url.URL, err error) *url.UR
 }
 
 // String returns the string representation of the path with query string
-func (o *BoardsFingerpathsByBoardNameGetURL) String() string {
+func (o *GetBoardsBoardNameFingerpathsURL) String() string {
 	return o.Must(o.Build()).String()
 }
 
 // BuildFull builds a full url with scheme, host, path and query string
-func (o *BoardsFingerpathsByBoardNameGetURL) BuildFull(scheme, host string) (*url.URL, error) {
+func (o *GetBoardsBoardNameFingerpathsURL) BuildFull(scheme, host string) (*url.URL, error) {
 	if scheme == "" {
-		return nil, errors.New("scheme is required for a full url on BoardsFingerpathsByBoardNameGetURL")
+		return nil, errors.New("scheme is required for a full url on GetBoardsBoardNameFingerpathsURL")
 	}
 	if host == "" {
-		return nil, errors.New("host is required for a full url on BoardsFingerpathsByBoardNameGetURL")
+		return nil, errors.New("host is required for a full url on GetBoardsBoardNameFingerpathsURL")
 	}
 
 	base, err := o.Build()
@@ -94,6 +94,6 @@ func (o *BoardsFingerpathsByBoardNameGetURL) BuildFull(scheme, host string) (*ur
 }
 
 // StringFull returns the string representation of a complete url
-func (o *BoardsFingerpathsByBoardNameGetURL) StringFull(scheme, host string) string {
+func (o *GetBoardsBoardNameFingerpathsURL) StringFull(scheme, host string) string {
 	return o.Must(o.BuildFull(scheme, host)).String()
 }

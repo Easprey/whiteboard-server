@@ -34,14 +34,14 @@ func configureAPI(api *operations.WhiteboardAPI) http.Handler {
 
 	api.JSONProducer = runtime.JSONProducer()
 
-	if api.UsersBoardsFingerpathsByBoardNameGetHandler == nil {
-		api.UsersBoardsFingerpathsByBoardNameGetHandler = users.BoardsFingerpathsByBoardNameGetHandlerFunc(func(params users.BoardsFingerpathsByBoardNameGetParams) middleware.Responder {
-			return middleware.NotImplemented("operation users.BoardsFingerpathsByBoardNameGet has not yet been implemented")
+	if api.UsersGetBoardsBoardNameFingerpathsHandler == nil {
+		api.UsersGetBoardsBoardNameFingerpathsHandler = users.GetBoardsBoardNameFingerpathsHandlerFunc(func(params users.GetBoardsBoardNameFingerpathsParams) middleware.Responder {
+			return middleware.NotImplemented("operation users.GetBoardsBoardNameFingerpaths has not yet been implemented")
 		})
 	}
-	if api.UsersBoardsFingerpathsByBoardNamePostHandler == nil {
-		api.UsersBoardsFingerpathsByBoardNamePostHandler = users.BoardsFingerpathsByBoardNamePostHandlerFunc(func(params users.BoardsFingerpathsByBoardNamePostParams) middleware.Responder {
-			return middleware.NotImplemented("operation users.BoardsFingerpathsByBoardNamePost has not yet been implemented")
+	if api.UsersPostBoardsBoardNameFingerpathsHandler == nil {
+		api.UsersPostBoardsBoardNameFingerpathsHandler = users.PostBoardsBoardNameFingerpathsHandlerFunc(func(params users.PostBoardsBoardNameFingerpathsParams) middleware.Responder {
+			return middleware.NotImplemented("operation users.PostBoardsBoardNameFingerpaths has not yet been implemented")
 		})
 	}
 

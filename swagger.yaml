@@ -6,8 +6,7 @@ info:
   title: "WhiteBoard API"
   contact:
     email: "webersterinc@gmail.com"
-host: "virtserver.swaggerhub.com"
-basePath: "/WebersterInc/WhiteBoard/0.1.0"
+basePath: "/api/v1"
 tags:
 - name: "users"
   description: "Operations available to normal users"
@@ -24,7 +23,6 @@ paths:
       - "users"
       summary: "getBoardFingerPaths"
       description: "Gets all fingerpaths associated with the given board.\n"
-      operationId: "BoardsFingerpathsByBoardNameGet"
       produces:
       - "application/json"
       parameters:
@@ -51,7 +49,6 @@ paths:
       - "users"
       summary: "addBoardFingerPaths"
       description: "Adds fingerpaths to the associated board."
-      operationId: "BoardsFingerpathsByBoardNamePost"
       produces:
       - "application/json"
       parameters:

@@ -17,18 +17,18 @@ import (
 	models "github.com/Easprey/whiteboard-server/models"
 )
 
-// NewBoardsFingerpathsByBoardNamePostParams creates a new BoardsFingerpathsByBoardNamePostParams object
+// NewPostBoardsBoardNameFingerpathsParams creates a new PostBoardsBoardNameFingerpathsParams object
 // no default values defined in spec.
-func NewBoardsFingerpathsByBoardNamePostParams() BoardsFingerpathsByBoardNamePostParams {
+func NewPostBoardsBoardNameFingerpathsParams() PostBoardsBoardNameFingerpathsParams {
 
-	return BoardsFingerpathsByBoardNamePostParams{}
+	return PostBoardsBoardNameFingerpathsParams{}
 }
 
-// BoardsFingerpathsByBoardNamePostParams contains all the bound params for the boards fingerpaths by board name post operation
+// PostBoardsBoardNameFingerpathsParams contains all the bound params for the post boards board name fingerpaths operation
 // typically these are obtained from a http.Request
 //
-// swagger:parameters BoardsFingerpathsByBoardNamePost
-type BoardsFingerpathsByBoardNamePostParams struct {
+// swagger:parameters PostBoardsBoardNameFingerpaths
+type PostBoardsBoardNameFingerpathsParams struct {
 
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
@@ -47,8 +47,8 @@ type BoardsFingerpathsByBoardNamePostParams struct {
 // BindRequest both binds and validates a request, it assumes that complex things implement a Validatable(strfmt.Registry) error interface
 // for simple values it will use straight method calls.
 //
-// To ensure default values, the struct must have been initialized with NewBoardsFingerpathsByBoardNamePostParams() beforehand.
-func (o *BoardsFingerpathsByBoardNamePostParams) BindRequest(r *http.Request, route *middleware.MatchedRoute) error {
+// To ensure default values, the struct must have been initialized with NewPostBoardsBoardNameFingerpathsParams() beforehand.
+func (o *PostBoardsBoardNameFingerpathsParams) BindRequest(r *http.Request, route *middleware.MatchedRoute) error {
 	var res []error
 
 	o.HTTPRequest = r
@@ -86,7 +86,7 @@ func (o *BoardsFingerpathsByBoardNamePostParams) BindRequest(r *http.Request, ro
 }
 
 // bindBoardName binds and validates parameter BoardName from path.
-func (o *BoardsFingerpathsByBoardNamePostParams) bindBoardName(rawData []string, hasKey bool, formats strfmt.Registry) error {
+func (o *PostBoardsBoardNameFingerpathsParams) bindBoardName(rawData []string, hasKey bool, formats strfmt.Registry) error {
 	var raw string
 	if len(rawData) > 0 {
 		raw = rawData[len(rawData)-1]

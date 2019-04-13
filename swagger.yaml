@@ -12,7 +12,7 @@ tags:
 - name: "users"
   description: "Operations available to normal users"
 schemes:
-- "https"
+- "http"
 consumes:
 - "application/json"
 produces:

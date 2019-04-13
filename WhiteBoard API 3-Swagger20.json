@@ -1,0 +1,143 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.1.0",
+    "title": "WhiteBoard API",
+    "description": "API for the WhiteBoard app developed by Weberster Inc",
+    "contact": {
+      "email": "webersterinc@gmail.com"
+    }
+  },
+  "host": "virtserver.swaggerhub.com",
+  "basePath": "/ejweber/WhiteBoard/0.1.0",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/boards/{boardName}/fingerpaths": {
+      "get": {
+        "description": "Gets all fingerpaths associated with the given board.\n",
+        "summary": "getBoardFingerPaths",
+        "tags": [
+          "users"
+        ],
+        "operationId": "BoardsFingerpathsByBoardNameGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "boardName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the name of the board"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "fingerpaths associated with board",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FingerPath"
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "no associated board",
+            "schema": {}
+          }
+        }
+      },
+      "post": {
+        "description": "Adds fingerpaths to the associated board.",
+        "summary": "addBoardFingerPaths",
+        "tags": [
+          "users"
+        ],
+        "operationId": "BoardsFingerpathsByBoardNamePost",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "boardName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the name of the board"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "description": "Inventory item to add",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FingerPath"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "fingerpaths added",
+            "headers": {}
+          },
+          "400": {
+            "description": "no associate board",
+            "schema": {}
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "FingerPath": {
+      "title": "FingerPath",
+      "type": "object",
+      "properties": {
+        "pathId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pathColor": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "dash": {
+          "type": "boolean"
+        },
+        "blur": {
+          "type": "boolean"
+        },
+        "clear": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "pathColor",
+        "dash",
+        "blur",
+        "clear"
+      ]
+    }
+  },
+  "tags": [
+    {
+      "name": "users",
+      "description": "Operations available to normal users"
+    }
+  ]
+}

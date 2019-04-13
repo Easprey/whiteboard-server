@@ -1,0 +1,108 @@
+---
+swagger: "2.0"
+info:
+  description: "API for the WhiteBoard app developed by Weberster Inc"
+  version: "0.1.0"
+  title: "WhiteBoard API"
+  contact:
+    email: "webersterinc@gmail.com"
+host: "virtserver.swaggerhub.com"
+basePath: "/WebersterInc/WhiteBoard/0.1.0"
+tags:
+- name: "users"
+  description: "Operations available to normal users"
+schemes:
+- "https"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /boards/{boardName}/fingerpaths:
+    get:
+      tags:
+      - "users"
+      summary: "getBoardFingerPaths"
+      description: "Gets all fingerpaths associated with the given board.\n"
+      operationId: "BoardsFingerpathsByBoardNameGet"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "boardName"
+        in: "path"
+        description: "the name of the board"
+        required: true
+        type: "string"
+        x-exportParamName: "BoardName"
+      responses:
+        200:
+          description: "fingerpaths associated with board"
+          headers: {}
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/FingerPath"
+        400:
+          description: "no associated board"
+          schema: {}
+      deprecated: false
+    post:
+      tags:
+      - "users"
+      summary: "addBoardFingerPaths"
+      description: "Adds fingerpaths to the associated board."
+      operationId: "BoardsFingerpathsByBoardNamePost"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "boardName"
+        in: "path"
+        description: "the name of the board"
+        required: true
+        type: "string"
+        x-exportParamName: "BoardName"
+      - in: "body"
+        name: "body"
+        description: "Inventory item to add"
+        required: false
+        schema:
+          type: "array"
+          items:
+            $ref: "#/definitions/FingerPath"
+        x-exportParamName: "Body"
+      responses:
+        201:
+          description: "fingerpaths added"
+          headers: {}
+        400:
+          description: "no associate board"
+          schema: {}
+      deprecated: false
+definitions:
+  FingerPath:
+    type: "object"
+    required:
+    - "blur"
+    - "clear"
+    - "dash"
+    - "pathColor"
+    properties:
+      pathId:
+        type: "integer"
+        format: "int32"
+      pathColor:
+        type: "integer"
+        format: "int32"
+      dash:
+        type: "boolean"
+      blur:
+        type: "boolean"
+      clear:
+        type: "boolean"
+    title: "FingerPath"
+    example:
+      clear: true
+      blur: true
+      pathId: 0
+      dash: true
+      pathColor: 6

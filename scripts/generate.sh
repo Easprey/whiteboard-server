@@ -1,0 +1,1 @@
+swagger generate server -A whiteboard -f ./swagger.yaml

@@ -6,7 +6,7 @@ API for the WhiteBoard app developed by Weberster Inc
 
 
     Schemes:
-      https
+      http
     Host: virtserver.swaggerhub.com
     BasePath: /
     Version: 0.1.0

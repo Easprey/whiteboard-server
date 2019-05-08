@@ -1,105 +1,94 @@
----
-swagger: "2.0"
+swagger: '2.0'
 info:
-  description: "API for the WhiteBoard app developed by Weberster Inc"
-  version: "0.1.0"
-  title: "WhiteBoard API"
+  version: 0.1.0
+  title: WhiteBoard API
+  description: API for the WhiteBoard app developed by Weberster Inc
   contact:
-    email: "webersterinc@gmail.com"
-basePath: "/api/v1"
-tags:
-- name: "users"
-  description: "Operations available to normal users"
+    email: webersterinc@gmail.com
+host: virtserver.swaggerhub.com
+# basePath: /ejweber/WhiteBoard/0.1.0
 schemes:
-- "http"
+  - http
 consumes:
-- "application/json"
+  - application/json
 produces:
-- "application/json"
+  - application/json
 paths:
-  /boards/{boardName}/fingerpaths:
+  '/boards/{boardName}/fingerpaths':
     get:
+      description: |
+        Gets all fingerpaths associated with the given board.
       tags:
-      - "users"
-      summary: "getBoardFingerPaths"
-      description: "Gets all fingerpaths associated with the given board.\n"
+        - fingerpaths
+      operationId: fingerPathsGet
+      deprecated: false
       produces:
-      - "application/json"
+        - application/json
       parameters:
-      - name: "boardName"
-        in: "path"
-        description: "the name of the board"
-        required: true
-        type: "string"
-        x-exportParamName: "BoardName"
+        - name: boardName
+          in: path
+          required: true
+          type: string
+          description: the name of the board
       responses:
-        200:
-          description: "fingerpaths associated with board"
-          headers: {}
+        '200':
+          description: fingerpaths associated with board
           schema:
-            type: "array"
+            type: array
             items:
-              $ref: "#/definitions/FingerPath"
-        400:
-          description: "no associated board"
-          schema: {}
-      deprecated: false
-    post:
-      tags:
-      - "users"
-      summary: "addBoardFingerPaths"
-      description: "Adds fingerpaths to the associated board."
-      produces:
-      - "application/json"
-      parameters:
-      - name: "boardName"
-        in: "path"
-        description: "the name of the board"
-        required: true
-        type: "string"
-        x-exportParamName: "BoardName"
-      - in: "body"
-        name: "body"
-        description: "Inventory item to add"
-        required: false
-        schema:
-          type: "array"
-          items:
-            $ref: "#/definitions/FingerPath"
-        x-exportParamName: "Body"
-      responses:
-        201:
-          description: "fingerpaths added"
+              $ref: '#/definitions/FingerPath'
           headers: {}
-        400:
-          description: "no associate board"
+        '400':
+          description: no associated board
           schema: {}
+    post:
+      description: Adds fingerpaths to the associated board.
+      tags:
+        - fingerpaths
       deprecated: false
+      operationId: fingerPathsPost
+      produces:
+        - application/json
+      parameters:
+        - name: boardName
+          in: path
+          required: true
+          type: string
+          description: the name of the board
+        - name: body
+          in: body
+          required: false
+          description: Inventory item to add
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/FingerPath'
+      responses:
+        '201':
+          description: fingerpaths added
+          headers: {}
+        '400':
+          description: no associated board
+          schema: {}
 definitions:
   FingerPath:
-    type: "object"
-    required:
-    - "blur"
-    - "clear"
-    - "dash"
-    - "pathColor"
+    title: FingerPath
+    type: object
     properties:
       pathId:
-        type: "integer"
-        format: "int32"
+        type: integer
+        format: int32
       pathColor:
-        type: "integer"
-        format: "int32"
+        type: integer
+        format: int32
       dash:
-        type: "boolean"
+        type: boolean
       blur:
-        type: "boolean"
+        type: boolean
       clear:
-        type: "boolean"
-    title: "FingerPath"
-    example:
-      clear: true
-      blur: true
-      pathId: 0
-      dash: true
-      pathColor: 6
+        type: boolean
+    required:
+      - pathColor
+      - dash
+      - blur
+      - clear

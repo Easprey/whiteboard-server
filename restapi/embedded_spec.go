@@ -25,7 +25,7 @@ func init() {
     "application/json"
   ],
   "schemes": [
-    "http"
+    "https"
   ],
   "swagger": "2.0",
   "info": {
@@ -36,7 +36,7 @@ func init() {
     },
     "version": "0.1.0"
   },
-  "basePath": "/api/v1",
+  "host": "virtserver.swaggerhub.com",
   "paths": {
     "/boards/{boardName}/fingerpaths": {
       "get": {
@@ -45,13 +45,12 @@ func init() {
           "application/json"
         ],
         "tags": [
-          "users"
+          "fingerpaths"
         ],
-        "summary": "getBoardFingerPaths",
+        "operationId": "fingerPathsGet",
         "parameters": [
           {
             "type": "string",
-            "x-exportParamName": "BoardName",
             "description": "the name of the board",
             "name": "boardName",
             "in": "path",
@@ -80,20 +79,18 @@ func init() {
           "application/json"
         ],
         "tags": [
-          "users"
+          "fingerpaths"
         ],
-        "summary": "addBoardFingerPaths",
+        "operationId": "fingerPathsPost",
         "parameters": [
           {
             "type": "string",
-            "x-exportParamName": "BoardName",
             "description": "the name of the board",
             "name": "boardName",
             "in": "path",
             "required": true
           },
           {
-            "x-exportParamName": "Body",
             "description": "Inventory item to add",
             "name": "body",
             "in": "body",
@@ -110,7 +107,7 @@ func init() {
             "description": "fingerpaths added"
           },
           "400": {
-            "description": "no associate board",
+            "description": "no associated board",
             "schema": {}
           }
         }
@@ -122,10 +119,10 @@ func init() {
       "type": "object",
       "title": "FingerPath",
       "required": [
-        "blur",
-        "clear",
+        "pathColor",
         "dash",
-        "pathColor"
+        "blur",
+        "clear"
       ],
       "properties": {
         "blur": {
@@ -145,22 +142,9 @@ func init() {
           "type": "integer",
           "format": "int32"
         }
-      },
-      "example": {
-        "blur": true,
-        "clear": true,
-        "dash": true,
-        "pathColor": 6,
-        "pathId": 0
       }
     }
-  },
-  "tags": [
-    {
-      "description": "Operations available to normal users",
-      "name": "users"
-    }
-  ]
+  }
 }`))
 	FlatSwaggerJSON = json.RawMessage([]byte(`{
   "consumes": [
@@ -170,7 +154,7 @@ func init() {
     "application/json"
   ],
   "schemes": [
-    "http"
+    "https"
   ],
   "swagger": "2.0",
   "info": {
@@ -181,7 +165,7 @@ func init() {
     },
     "version": "0.1.0"
   },
-  "basePath": "/api/v1",
+  "host": "virtserver.swaggerhub.com",
   "paths": {
     "/boards/{boardName}/fingerpaths": {
       "get": {
@@ -190,13 +174,12 @@ func init() {
           "application/json"
         ],
         "tags": [
-          "users"
+          "fingerpaths"
         ],
-        "summary": "getBoardFingerPaths",
+        "operationId": "fingerPathsGet",
         "parameters": [
           {
             "type": "string",
-            "x-exportParamName": "BoardName",
             "description": "the name of the board",
             "name": "boardName",
             "in": "path",
@@ -225,20 +208,18 @@ func init() {
           "application/json"
         ],
         "tags": [
-          "users"
+          "fingerpaths"
         ],
-        "summary": "addBoardFingerPaths",
+        "operationId": "fingerPathsPost",
         "parameters": [
           {
             "type": "string",
-            "x-exportParamName": "BoardName",
             "description": "the name of the board",
             "name": "boardName",
             "in": "path",
             "required": true
           },
           {
-            "x-exportParamName": "Body",
             "description": "Inventory item to add",
             "name": "body",
             "in": "body",
@@ -255,7 +236,7 @@ func init() {
             "description": "fingerpaths added"
           },
           "400": {
-            "description": "no associate board",
+            "description": "no associated board",
             "schema": {}
           }
         }
@@ -267,10 +248,10 @@ func init() {
       "type": "object",
       "title": "FingerPath",
       "required": [
-        "blur",
-        "clear",
+        "pathColor",
         "dash",
-        "pathColor"
+        "blur",
+        "clear"
       ],
       "properties": {
         "blur": {
@@ -290,21 +271,8 @@ func init() {
           "type": "integer",
           "format": "int32"
         }
-      },
-      "example": {
-        "blur": true,
-        "clear": true,
-        "dash": true,
-        "pathColor": 6,
-        "pathId": 0
       }
     }
-  },
-  "tags": [
-    {
-      "description": "Operations available to normal users",
-      "name": "users"
-    }
-  ]
+  }
 }`))
 }

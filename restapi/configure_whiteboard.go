@@ -4,20 +4,31 @@ package restapi
 
 import (
 	"crypto/tls"
+	"fmt"
 	"net/http"
+
+	"github.com/go-openapi/swag"
 
 	errors "github.com/go-openapi/errors"
 	runtime "github.com/go-openapi/runtime"
-	middleware "github.com/go-openapi/runtime/middleware"
 
+	"github.com/Easprey/whiteboard-server/handlers"
 	"github.com/Easprey/whiteboard-server/restapi/operations"
-	"github.com/Easprey/whiteboard-server/restapi/operations/users"
+	"github.com/Easprey/whiteboard-server/restapi/operations/fingerpaths"
 )
 
 //go:generate swagger generate server --target ../../whiteboard-server --name Whiteboard --spec ../swagger.yaml
 
+// create a DataBase variable to read in connection string and hold database connection
+var db = handlers.DataBase{}
+
 func configureFlags(api *operations.WhiteboardAPI) {
-	// api.CommandLineOptionsGroups = []swag.CommandLineOptionsGroup{ ... }
+	api.CommandLineOptionsGroups = []swag.CommandLineOptionsGroup{
+		swag.CommandLineOptionsGroup{
+			ShortDescription: "WhiteBoard Server Service Options",
+			Options:          &db,
+		},
+	}
 }
 
 func configureAPI(api *operations.WhiteboardAPI) http.Handler {
@@ -34,15 +45,11 @@ func configureAPI(api *operations.WhiteboardAPI) http.Handler {
 
 	api.JSONProducer = runtime.JSONProducer()
 
-	if api.UsersGetBoardsBoardNameFingerpathsHandler == nil {
-		api.UsersGetBoardsBoardNameFingerpathsHandler = users.GetBoardsBoardNameFingerpathsHandlerFunc(func(params users.GetBoardsBoardNameFingerpathsParams) middleware.Responder {
-			return middleware.NotImplemented("operation users.GetBoardsBoardNameFingerpaths has not yet been implemented")
-		})
+	if api.FingerpathsFingerPathsGetHandler == nil {
+		api.FingerpathsFingerPathsGetHandler = fingerpaths.FingerPathsGetHandlerFunc(handlers.GetFingerPaths)
 	}
-	if api.UsersPostBoardsBoardNameFingerpathsHandler == nil {
-		api.UsersPostBoardsBoardNameFingerpathsHandler = users.PostBoardsBoardNameFingerpathsHandlerFunc(func(params users.PostBoardsBoardNameFingerpathsParams) middleware.Responder {
-			return middleware.NotImplemented("operation users.PostBoardsBoardNameFingerpaths has not yet been implemented")
-		})
+	if api.FingerpathsFingerPathsPostHandler == nil {
+		api.FingerpathsFingerPathsPostHandler = fingerpaths.FingerPathsPostHandlerFunc(handlers.PostFingerPaths)
 	}
 
 	api.ServerShutdown = func() {}
@@ -60,6 +67,8 @@ func configureTLS(tlsConfig *tls.Config) {
 // This function can be called multiple times, depending on the number of serving schemes.
 // scheme value will be set accordingly: "http", "https" or "unix"
 func configureServer(s *http.Server, scheme, addr string) {
+	fmt.Printf("called")
+	db.Init()
 }
 
 // The middleware configuration is for the handler executors. These do not apply to the swagger.json document.

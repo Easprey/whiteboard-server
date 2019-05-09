@@ -4,7 +4,6 @@ package restapi
 
 import (
 	"crypto/tls"
-	"fmt"
 	"net/http"
 
 	"github.com/go-openapi/swag"
@@ -14,7 +13,6 @@ import (
 
 	"github.com/Easprey/whiteboard-server/handlers"
 	"github.com/Easprey/whiteboard-server/restapi/operations"
-	"github.com/Easprey/whiteboard-server/restapi/operations/fingerpaths"
 )
 
 //go:generate swagger generate server --target ../../whiteboard-server --name Whiteboard --spec ../swagger.yaml
@@ -45,12 +43,8 @@ func configureAPI(api *operations.WhiteboardAPI) http.Handler {
 
 	api.JSONProducer = runtime.JSONProducer()
 
-	if api.FingerpathsFingerPathsGetHandler == nil {
-		api.FingerpathsFingerPathsGetHandler = fingerpaths.FingerPathsGetHandlerFunc(handlers.GetFingerPaths)
-	}
-	if api.FingerpathsFingerPathsPostHandler == nil {
-		api.FingerpathsFingerPathsPostHandler = fingerpaths.FingerPathsPostHandlerFunc(handlers.PostFingerPaths)
-	}
+	api.FingerPathsGetHandler = operations.FingerPathsGetHandlerFunc(handlers.GetFingerPaths(&db))
+	api.FingerPathsPostHandler = operations.FingerPathsPostHandlerFunc(handlers.PostFingerPaths(&db))
 
 	api.ServerShutdown = func() {}
 
@@ -67,7 +61,6 @@ func configureTLS(tlsConfig *tls.Config) {
 // This function can be called multiple times, depending on the number of serving schemes.
 // scheme value will be set accordingly: "http", "https" or "unix"
 func configureServer(s *http.Server, scheme, addr string) {
-	fmt.Printf("called")
 	db.Init()
 }
 

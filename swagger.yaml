@@ -6,7 +6,7 @@ info:
   contact:
     email: webersterinc@gmail.com
 host: virtserver.swaggerhub.com
-# basePath: /ejweber/WhiteBoard/0.1.0
+basePath: /api/v1
 schemes:
   - http
 consumes:
@@ -18,8 +18,6 @@ paths:
     get:
       description: |
         Gets all fingerpaths associated with the given board.
-      tags:
-        - fingerpaths
       operationId: fingerPathsGet
       deprecated: false
       produces:
@@ -43,8 +41,6 @@ paths:
           schema: {}
     post:
       description: Adds fingerpaths to the associated board.
-      tags:
-        - fingerpaths
       deprecated: false
       operationId: fingerPathsPost
       produces:

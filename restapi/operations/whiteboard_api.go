@@ -18,8 +18,6 @@ import (
 	spec "github.com/go-openapi/spec"
 	strfmt "github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-
-	"github.com/Easprey/whiteboard-server/restapi/operations/fingerpaths"
 )
 
 // NewWhiteboardAPI creates a new Whiteboard instance
@@ -39,11 +37,11 @@ func NewWhiteboardAPI(spec *loads.Document) *WhiteboardAPI {
 		BearerAuthenticator: security.BearerAuth,
 		JSONConsumer:        runtime.JSONConsumer(),
 		JSONProducer:        runtime.JSONProducer(),
-		FingerpathsFingerPathsGetHandler: fingerpaths.FingerPathsGetHandlerFunc(func(params fingerpaths.FingerPathsGetParams) middleware.Responder {
-			return middleware.NotImplemented("operation FingerpathsFingerPathsGet has not yet been implemented")
+		FingerPathsGetHandler: FingerPathsGetHandlerFunc(func(params FingerPathsGetParams) middleware.Responder {
+			return middleware.NotImplemented("operation FingerPathsGet has not yet been implemented")
 		}),
-		FingerpathsFingerPathsPostHandler: fingerpaths.FingerPathsPostHandlerFunc(func(params fingerpaths.FingerPathsPostParams) middleware.Responder {
-			return middleware.NotImplemented("operation FingerpathsFingerPathsPost has not yet been implemented")
+		FingerPathsPostHandler: FingerPathsPostHandlerFunc(func(params FingerPathsPostParams) middleware.Responder {
+			return middleware.NotImplemented("operation FingerPathsPost has not yet been implemented")
 		}),
 	}
 }
@@ -76,10 +74,10 @@ type WhiteboardAPI struct {
 	// JSONProducer registers a producer for a "application/json" mime type
 	JSONProducer runtime.Producer
 
-	// FingerpathsFingerPathsGetHandler sets the operation handler for the finger paths get operation
-	FingerpathsFingerPathsGetHandler fingerpaths.FingerPathsGetHandler
-	// FingerpathsFingerPathsPostHandler sets the operation handler for the finger paths post operation
-	FingerpathsFingerPathsPostHandler fingerpaths.FingerPathsPostHandler
+	// FingerPathsGetHandler sets the operation handler for the finger paths get operation
+	FingerPathsGetHandler FingerPathsGetHandler
+	// FingerPathsPostHandler sets the operation handler for the finger paths post operation
+	FingerPathsPostHandler FingerPathsPostHandler
 
 	// ServeError is called when an error is received, there is a default handler
 	// but you can set your own with this
@@ -143,12 +141,12 @@ func (o *WhiteboardAPI) Validate() error {
 		unregistered = append(unregistered, "JSONProducer")
 	}
 
-	if o.FingerpathsFingerPathsGetHandler == nil {
-		unregistered = append(unregistered, "fingerpaths.FingerPathsGetHandler")
+	if o.FingerPathsGetHandler == nil {
+		unregistered = append(unregistered, "FingerPathsGetHandler")
 	}
 
-	if o.FingerpathsFingerPathsPostHandler == nil {
-		unregistered = append(unregistered, "fingerpaths.FingerPathsPostHandler")
+	if o.FingerPathsPostHandler == nil {
+		unregistered = append(unregistered, "FingerPathsPostHandler")
 	}
 
 	if len(unregistered) > 0 {
@@ -252,12 +250,12 @@ func (o *WhiteboardAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
-	o.handlers["GET"]["/boards/{boardName}/fingerpaths"] = fingerpaths.NewFingerPathsGet(o.context, o.FingerpathsFingerPathsGetHandler)
+	o.handlers["GET"]["/boards/{boardName}/fingerpaths"] = NewFingerPathsGet(o.context, o.FingerPathsGetHandler)
 
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
-	o.handlers["POST"]["/boards/{boardName}/fingerpaths"] = fingerpaths.NewFingerPathsPost(o.context, o.FingerpathsFingerPathsPostHandler)
+	o.handlers["POST"]["/boards/{boardName}/fingerpaths"] = NewFingerPathsPost(o.context, o.FingerPathsPostHandler)
 
 }
 

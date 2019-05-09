@@ -37,15 +37,13 @@ func init() {
     "version": "0.1.0"
   },
   "host": "virtserver.swaggerhub.com",
+  "basePath": "/api/v1",
   "paths": {
     "/boards/{boardName}/fingerpaths": {
       "get": {
         "description": "Gets all fingerpaths associated with the given board.\n",
         "produces": [
           "application/json"
-        ],
-        "tags": [
-          "fingerpaths"
         ],
         "operationId": "fingerPathsGet",
         "parameters": [
@@ -77,9 +75,6 @@ func init() {
         "description": "Adds fingerpaths to the associated board.",
         "produces": [
           "application/json"
-        ],
-        "tags": [
-          "fingerpaths"
         ],
         "operationId": "fingerPathsPost",
         "parameters": [
@@ -166,15 +161,13 @@ func init() {
     "version": "0.1.0"
   },
   "host": "virtserver.swaggerhub.com",
+  "basePath": "/api/v1",
   "paths": {
     "/boards/{boardName}/fingerpaths": {
       "get": {
         "description": "Gets all fingerpaths associated with the given board.\n",
         "produces": [
           "application/json"
-        ],
-        "tags": [
-          "fingerpaths"
         ],
         "operationId": "fingerPathsGet",
         "parameters": [
@@ -206,9 +199,6 @@ func init() {
         "description": "Adds fingerpaths to the associated board.",
         "produces": [
           "application/json"
-        ],
-        "tags": [
-          "fingerpaths"
         ],
         "operationId": "fingerPathsPost",
         "parameters": [

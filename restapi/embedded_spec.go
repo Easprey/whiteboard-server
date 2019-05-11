@@ -115,13 +115,19 @@ func init() {
       "title": "FingerPath",
       "required": [
         "pathColor",
+        "boardColor",
         "dash",
         "blur",
-        "clear"
+        "clear",
+        "fingerPoints"
       ],
       "properties": {
         "blur": {
           "type": "boolean"
+        },
+        "boardColor": {
+          "type": "integer",
+          "format": "uint32"
         },
         "clear": {
           "type": "boolean"
@@ -129,11 +135,38 @@ func init() {
         "dash": {
           "type": "boolean"
         },
+        "fingerPoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FingerPoint"
+          }
+        },
         "pathColor": {
+          "type": "integer",
+          "format": "uint32"
+        },
+        "pathId": {
           "type": "integer",
           "format": "int32"
         },
-        "pathId": {
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "FingerPoint": {
+      "type": "object",
+      "title": "FingerPoint",
+      "required": [
+        "x",
+        "y"
+      ],
+      "properties": {
+        "x": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "y": {
           "type": "integer",
           "format": "int32"
         }
@@ -239,13 +272,19 @@ func init() {
       "title": "FingerPath",
       "required": [
         "pathColor",
+        "boardColor",
         "dash",
         "blur",
-        "clear"
+        "clear",
+        "fingerPoints"
       ],
       "properties": {
         "blur": {
           "type": "boolean"
+        },
+        "boardColor": {
+          "type": "integer",
+          "format": "uint32"
         },
         "clear": {
           "type": "boolean"
@@ -253,11 +292,38 @@ func init() {
         "dash": {
           "type": "boolean"
         },
+        "fingerPoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FingerPoint"
+          }
+        },
         "pathColor": {
+          "type": "integer",
+          "format": "uint32"
+        },
+        "pathId": {
           "type": "integer",
           "format": "int32"
         },
-        "pathId": {
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "FingerPoint": {
+      "type": "object",
+      "title": "FingerPoint",
+      "required": [
+        "x",
+        "y"
+      ],
+      "properties": {
+        "x": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "y": {
           "type": "integer",
           "format": "int32"
         }

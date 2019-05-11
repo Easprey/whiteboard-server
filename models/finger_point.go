@@ -19,11 +19,11 @@ type FingerPoint struct {
 
 	// x
 	// Required: true
-	X *int64 `json:"x"`
+	X *int32 `json:"x"`
 
 	// y
 	// Required: true
-	Y *int64 `json:"y"`
+	Y *int32 `json:"y"`
 }
 
 // Validate validates this finger point

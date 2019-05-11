@@ -76,15 +76,39 @@ definitions:
         format: int32
       pathColor:
         type: integer
-        format: int32
+        format: uint32
+      boardColor:
+        type: integer
+        format: uint32
       dash:
         type: boolean
       blur:
         type: boolean
       clear:
         type: boolean
+      fingerPoints: 
+        type: array
+        items: 
+          $ref: '#/definitions/FingerPoint'
+      userId:
+        type: string
     required:
       - pathColor
+      - boardColor
       - dash
       - blur
       - clear
+      - fingerPoints
+  FingerPoint:
+    title: FingerPoint
+    type: object
+    properties:
+      x:
+        type: integer
+        format: int32
+      'y':
+        type: integer
+        format: int32
+    required:
+      - x
+      - 'y'

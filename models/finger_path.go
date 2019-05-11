@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"strconv"
+
 	strfmt "github.com/go-openapi/strfmt"
 
 	"github.com/go-openapi/errors"
@@ -21,6 +23,10 @@ type FingerPath struct {
 	// Required: true
 	Blur *bool `json:"blur"`
 
+	// board color
+	// Required: true
+	BoardColor *uint32 `json:"boardColor"`
+
 	// clear
 	// Required: true
 	Clear *bool `json:"clear"`
@@ -29,12 +35,19 @@ type FingerPath struct {
 	// Required: true
 	Dash *bool `json:"dash"`
 
+	// finger points
+	// Required: true
+	FingerPoints []*FingerPoint `json:"fingerPoints"`
+
 	// path color
 	// Required: true
-	PathColor *int32 `json:"pathColor"`
+	PathColor *uint32 `json:"pathColor"`
 
 	// path Id
 	PathID int32 `json:"pathId,omitempty"`
+
+	// user Id
+	UserID string `json:"userId,omitempty"`
 }
 
 // Validate validates this finger path
@@ -45,11 +58,19 @@ func (m *FingerPath) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateBoardColor(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateClear(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateDash(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateFingerPoints(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -72,6 +93,15 @@ func (m *FingerPath) validateBlur(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *FingerPath) validateBoardColor(formats strfmt.Registry) error {
+
+	if err := validate.Required("boardColor", "body", m.BoardColor); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *FingerPath) validateClear(formats strfmt.Registry) error {
 
 	if err := validate.Required("clear", "body", m.Clear); err != nil {
@@ -85,6 +115,31 @@ func (m *FingerPath) validateDash(formats strfmt.Registry) error {
 
 	if err := validate.Required("dash", "body", m.Dash); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *FingerPath) validateFingerPoints(formats strfmt.Registry) error {
+
+	if err := validate.Required("fingerPoints", "body", m.FingerPoints); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.FingerPoints); i++ {
+		if swag.IsZero(m.FingerPoints[i]) { // not required
+			continue
+		}
+
+		if m.FingerPoints[i] != nil {
+			if err := m.FingerPoints[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("fingerPoints" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

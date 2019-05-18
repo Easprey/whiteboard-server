@@ -22,9 +22,9 @@ func GetFingerPaths(db *DataBase) func(operations.FingerPathsGetParams) middlewa
 
 		// query the database
 		q := "SELECT fingerpaths.path_id, path_color, board_color, dash, blur, clear, " +
-			"user_id, x, y FROM fingerpaths INNER JOIN fingerpoints WHERE board = 'test' AND " +
+			"user_id, x, y FROM fingerpaths INNER JOIN fingerpoints WHERE board = ? AND " +
 			"fingerpaths.path_id = fingerpoints.path_id"
-		rows, err := db.Query(q)
+		rows, err := db.Query(q, params.BoardName)
 		if err != nil {
 			log.Fatal(err) // TODO: return server error
 		}
@@ -41,7 +41,10 @@ func GetFingerPaths(db *DataBase) func(operations.FingerPathsGetParams) middlewa
 				log.Fatal(err) // TODO: return server error
 			}
 
-			if path.PathID == lastPath.PathID {
+			if lastPath.PathID == 0 {
+				lastPath = path
+				lastPath.FingerPoints = append(path.FingerPoints, &point)
+			} else if path.PathID == lastPath.PathID {
 				// simply append point to lastPath if it is an extension of lastPath
 				lastPath.FingerPoints = append(lastPath.FingerPoints, &point)
 			} else {
@@ -66,6 +69,53 @@ func GetFingerPaths(db *DataBase) func(operations.FingerPathsGetParams) middlewa
 
 func PostFingerPaths(db *DataBase) func(operations.FingerPathsPostParams) middleware.Responder {
 	return func(params operations.FingerPathsPostParams) middleware.Responder {
-		return middleware.NotImplemented("operation operations.FingerPathsPost has not yet been implemented")
+		// for each fingerpath we receive
+		for _, path := range params.Body {
+			// begin a new transaction
+			tx, err := db.Begin()
+			if err != nil {
+				log.Fatal(err)
+			}
+			defer tx.Rollback()
+
+			// prepare SQL statements
+			pathStmt, err := tx.Prepare("INSERT INTO fingerpaths (board, path_color, board_color, dash, " +
+				"blur, clear, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)")
+			if err != nil {
+				log.Fatal(err)
+			}
+			defer pathStmt.Close()
+			pointStmt, err := tx.Prepare("INSERT INTO fingerpoints (path_id, x, y) VALUES (?, ?, ?)")
+			if err != nil {
+				log.Fatal(err)
+			}
+			defer pointStmt.Close()
+
+			// insert fingerpath into database
+			result, err := pathStmt.Exec(params.BoardName, *path.PathColor, *path.BoardColor, *path.Dash, *path.Blur, *path.Clear, path.UserID)
+			if err != nil {
+				log.Fatal(err)
+			}
+
+			// insert associated fingerpoints into database
+			for _, point := range path.FingerPoints {
+				id, err := result.LastInsertId()
+				if err != nil {
+					log.Fatal(err)
+				}
+				_, err = pointStmt.Exec(id, *point.X, *point.Y)
+				if err != nil {
+					log.Fatal(err)
+				}
+			}
+
+			// commit database transaction
+			err = tx.Commit()
+			if err != nil {
+				log.Fatal(err)
+			}
+		}
+
+		return operations.NewFingerPathsPostCreated()
 	}
 }

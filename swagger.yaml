@@ -89,6 +89,8 @@ definitions:
       fingerPoints: 
         type: array
         items: 
+      strokeWidth:
+        type: int32
           $ref: '#/definitions/FingerPoint'
       userId:
         type: string
@@ -99,6 +101,7 @@ definitions:
       - blur
       - clear
       - fingerPoints
+      - strokeWidth
   FingerPoint:
     title: FingerPoint
     type: object

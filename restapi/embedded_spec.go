@@ -119,7 +119,8 @@ func init() {
         "dash",
         "blur",
         "clear",
-        "fingerPoints"
+        "fingerPoints",
+        "strokeWidth"
       ],
       "properties": {
         "blur": {
@@ -146,6 +147,10 @@ func init() {
           "format": "uint32"
         },
         "pathId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "strokeWidth": {
           "type": "integer",
           "format": "int32"
         },
@@ -276,7 +281,8 @@ func init() {
         "dash",
         "blur",
         "clear",
-        "fingerPoints"
+        "fingerPoints",
+        "strokeWidth"
       ],
       "properties": {
         "blur": {
@@ -303,6 +309,10 @@ func init() {
           "format": "uint32"
         },
         "pathId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "strokeWidth": {
           "type": "integer",
           "format": "int32"
         },

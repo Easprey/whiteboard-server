@@ -89,9 +89,10 @@ definitions:
       fingerPoints: 
         type: array
         items: 
-      strokeWidth:
-        type: int32
           $ref: '#/definitions/FingerPoint'
+      strokeWidth:
+        type: integer
+        format: int32
       userId:
         type: string
     required:

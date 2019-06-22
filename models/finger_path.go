@@ -46,6 +46,10 @@ type FingerPath struct {
 	// path Id
 	PathID int32 `json:"pathId,omitempty"`
 
+	// stroke width
+	// Required: true
+	StrokeWidth *int32 `json:"strokeWidth"`
+
 	// user Id
 	UserID string `json:"userId,omitempty"`
 }
@@ -75,6 +79,10 @@ func (m *FingerPath) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validatePathColor(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStrokeWidth(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -148,6 +156,15 @@ func (m *FingerPath) validateFingerPoints(formats strfmt.Registry) error {
 func (m *FingerPath) validatePathColor(formats strfmt.Registry) error {
 
 	if err := validate.Required("pathColor", "body", m.PathColor); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *FingerPath) validateStrokeWidth(formats strfmt.Registry) error {
+
+	if err := validate.Required("strokeWidth", "body", m.StrokeWidth); err != nil {
 		return err
 	}
 

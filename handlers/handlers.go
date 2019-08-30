@@ -26,7 +26,7 @@ func GetFingerPaths(db *DataBase) func(operations.FingerPathsGetParams) middlewa
 			"fingerpaths.path_id = fingerpoints.path_id"
 		rows, err := db.Query(q, params.BoardName)
 		if err != nil {
-			log.Fatal(err) // TODO: return server error
+			return operations.NewFingerPathsGetBadRequest() // TODO: change status code
 		}
 		defer rows.Close()
 

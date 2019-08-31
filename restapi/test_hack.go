@@ -10,9 +10,7 @@ import (
 	"os"
 
 	"github.com/Easprey/whiteboard-server/handlers"
-
 	"github.com/Easprey/whiteboard-server/restapi/operations"
-
 	loads "github.com/go-openapi/loads"
 )
 

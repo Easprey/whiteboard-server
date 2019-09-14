@@ -75,11 +75,9 @@ definitions:
         type: integer
         format: int32
       pathColor:
-        type: integer
-        format: uint32
+        type: string
       boardColor:
-        type: integer
-        format: uint32
+        type: string
       dash:
         type: boolean
       blur:

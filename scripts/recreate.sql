@@ -5,8 +5,8 @@ DROP TABLE users;
 CREATE TABLE IF NOT EXISTS `whiteboard_dev`.`fingerpaths` (
   `path_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `board` VARCHAR(60) NOT NULL,
-  `path_color` INT(11) UNSIGNED NULL DEFAULT NULL,
-  `board_color` INT(11) UNSIGNED NULL DEFAULT NULL,
+  `path_color` CHAR(8) NULL DEFAULT NULL,
+  `board_color` CHAR(8) NULL DEFAULT NULL,
   `dash` TINYINT(4) NULL DEFAULT NULL,
   `blur` TINYINT(4) NULL DEFAULT NULL,
   `clear` TINYINT(4) NULL DEFAULT '0',
@@ -19,7 +19,6 @@ CREATE TABLE IF NOT EXISTS `whiteboard_dev`.`fingerpaths` (
     REFERENCES `whiteboard_dev`.`users` (`user_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-
 
 CREATE TABLE IF NOT EXISTS `whiteboard_dev`.`fingerpoints` (
   `path_id` INT(10) UNSIGNED NOT NULL,

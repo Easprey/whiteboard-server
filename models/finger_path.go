@@ -25,7 +25,7 @@ type FingerPath struct {
 
 	// board color
 	// Required: true
-	BoardColor *uint32 `json:"boardColor"`
+	BoardColor *string `json:"boardColor"`
 
 	// clear
 	// Required: true
@@ -41,7 +41,7 @@ type FingerPath struct {
 
 	// path color
 	// Required: true
-	PathColor *uint32 `json:"pathColor"`
+	PathColor *string `json:"pathColor"`
 
 	// path Id
 	PathID int32 `json:"pathId,omitempty"`

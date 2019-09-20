@@ -5,8 +5,6 @@ import (
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-
-	. "github.com/Easprey/whiteboard-server/handlers"
 )
 
 func TestHandlers(t *testing.T) {

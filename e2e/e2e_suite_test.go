@@ -1,6 +1,7 @@
 package e2e_test
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -10,7 +11,10 @@ import (
 	"testing"
 
 	"github.com/Easprey/whiteboard-server/handlers"
+	"github.com/Easprey/whiteboard-server/models"
 	"github.com/Easprey/whiteboard-server/restapi"
+
+	"github.com/go-openapi/swag"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
@@ -50,11 +54,12 @@ func getDB() handlers.DataBase {
 
 var _ = Describe("FingerPathsGet", func() {
 	var (
-		db       handlers.DataBase
-		response *http.Response
-		server   *httptest.Server
-		body     []byte
-		err      error
+		db           handlers.DataBase
+		response     *http.Response
+		server       *httptest.Server
+		body         []byte
+		err          error
+		expectedJSON []byte
 	)
 
 	// set up database
@@ -84,6 +89,33 @@ var _ = Describe("FingerPathsGet", func() {
 		BeforeEach(func() {
 			response, err = http.Get(server.URL + "/api/v1/boards/test_board/fingerpaths")
 			body, err = ioutil.ReadAll(response.Body)
+			expected := []models.FingerPath{
+				{
+					Blur:       swag.Bool(false),
+					BoardColor: swag.Int32(0),
+					Clear:      swag.Bool(false),
+					Dash:       swag.Bool(false),
+					FingerPoints: []*models.FingerPoint{
+						{
+							X: swag.Int32(507),
+							Y: swag.Int32(507),
+						},
+						{
+							X: swag.Int32(508),
+							Y: swag.Int32(508),
+						},
+						{
+							X: swag.Int32(509),
+							Y: swag.Int32(509),
+						},
+					},
+					PathColor:   swag.Int32(0),
+					PathID:      1,
+					StrokeWidth: nil,
+					UserID:      "test_user",
+				},
+			}
+			expectedJSON, err = json.Marshal(expected)
 		})
 
 		It("should not error", func() {
@@ -99,8 +131,7 @@ var _ = Describe("FingerPathsGet", func() {
 		})
 
 		It("should return the right paths", func() {
-			// TODO: make this not broken
-			Expect(body).To(MatchJSON([]byte(`[{"userId": "hello"}]`)))
+			Expect(body).To(MatchJSON(expectedJSON))
 		})
 	})
 

@@ -76,10 +76,10 @@ definitions:
         format: int32
       pathColor:
         type: integer
-        format: int32
+        format: uint32
       boardColor:
         type: integer
-        format: int32
+        format: uint32
       dash:
         type: boolean
       blur:

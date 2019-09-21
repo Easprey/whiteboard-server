@@ -128,7 +128,7 @@ func init() {
         },
         "boardColor": {
           "type": "integer",
-          "format": "int32"
+          "format": "uint32"
         },
         "clear": {
           "type": "boolean"
@@ -144,7 +144,7 @@ func init() {
         },
         "pathColor": {
           "type": "integer",
-          "format": "int32"
+          "format": "uint32"
         },
         "pathId": {
           "type": "integer",
@@ -290,7 +290,7 @@ func init() {
         },
         "boardColor": {
           "type": "integer",
-          "format": "int32"
+          "format": "uint32"
         },
         "clear": {
           "type": "boolean"
@@ -306,7 +306,7 @@ func init() {
         },
         "pathColor": {
           "type": "integer",
-          "format": "int32"
+          "format": "uint32"
         },
         "pathId": {
           "type": "integer",

@@ -9,8 +9,8 @@ CREATE TABLE IF NOT EXISTS `whiteboard_dev`.`users` (
 CREATE TABLE IF NOT EXISTS `whiteboard_dev`.`fingerpaths` (
   `path_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `board` VARCHAR(60) NOT NULL,
-  `path_color` INT NULL DEFAULT NULL,
-  `board_color` INT NULL DEFAULT NULL,
+  `path_color` INT UNSIGNED NULL DEFAULT NULL,
+  `board_color` INT UNSIGNED DEFAULT NULL,
   `dash` BOOLEAN NULL DEFAULT NULL,
   `blur` BOOLEAN NULL DEFAULT NULL,
   `clear` BOOLEAN NULL DEFAULT '0',

@@ -92,7 +92,7 @@ var _ = Describe("FingerPathsGet", func() {
 			expected := []models.FingerPath{
 				{
 					Blur:       swag.Bool(false),
-					BoardColor: swag.Int32(0),
+					BoardColor: swag.Uint32(0xFFFFFFFF),
 					Clear:      swag.Bool(false),
 					Dash:       swag.Bool(false),
 					FingerPoints: []*models.FingerPoint{
@@ -109,7 +109,7 @@ var _ = Describe("FingerPathsGet", func() {
 							Y: swag.Int32(509),
 						},
 					},
-					PathColor:   swag.Int32(0),
+					PathColor:   swag.Uint32(0xFFFF0000),
 					PathID:      1,
 					StrokeWidth: nil,
 					UserID:      "test_user",
